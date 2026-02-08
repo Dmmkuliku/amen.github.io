@@ -1,0 +1,1710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>amen Clothing | Official Store</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* amen brand colour system (from deck) */
+            --red: #800020;          /* Burgundy – divine royalty */
+            --black: #000000;        /* Black – strength and clarity */
+            --white: #f7f3ea;        /* Off‑white – peace */
+            --bagamba-1: #d4af37;    /* Gold – sacred power */
+            --bagamba-2: #f5d277;    /* Gold highlight */
+
+            --bg-dark: #080810;
+            --text-muted: #ccc3b5;
+            --radius-lg: 18px;
+            --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.45);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            background: radial-gradient(circle at top left, #1f1f2f 0, #050509 40%, #000000 100%);
+            color: var(--white);
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        /* Layout */
+        .container {
+            width: min(1200px, 100% - 32px);
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(18px);
+            background: linear-gradient(
+                to right,
+                rgba(0, 0, 0, 0.96),
+                rgba(12, 8, 4, 0.94)
+            );
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-mark {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: conic-gradient(from 210deg, var(--red), var(--bagamba-1), var(--bagamba-2), var(--red));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 22px rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+
+        .logo-mark .logo-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .logo-text span:first-child {
+            font-weight: 700;
+            font-size: 20px;
+            letter-spacing: 2px;
+        }
+
+        .logo-tagline {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a {
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--red), var(--bagamba-1));
+            transition: width 0.25s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cart-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 16px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            cursor: pointer;
+            transition: background 0.25s ease, transform 0.2s ease;
+        }
+
+        .cart-indicator:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-1px);
+        }
+
+        .cart-icon {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .cart-count {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* Mobile nav */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .nav-toggle span {
+            width: 22px;
+            height: 2px;
+            background: var(--white);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                inset: 60px 16px auto 16px;
+                padding: 14px 16px;
+                border-radius: 14px;
+                background: rgba(3, 3, 3, 0.96);
+                flex-direction: column;
+                align-items: flex-start;
+                transform-origin: top;
+                transform: scaleY(0);
+                opacity: 0;
+                pointer-events: none;
+                transition: transform 0.18s ease, opacity 0.18s ease;
+            }
+
+            .nav-links.open {
+                transform: scaleY(1);
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .cart-indicator {
+                margin-left: 12px;
+            }
+        }
+
+        /* Hero */
+        .hero {
+            padding: 80px 0 40px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 42px;
+            align-items: center;
+        }
+
+        .hero-eyebrow {
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--bagamba-2);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero-eyebrow::before {
+            content: "";
+            width: 22px;
+            height: 2px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--red), var(--bagamba-1));
+        }
+
+        .hero-title {
+            font-size: clamp(32px, 4vw, 44px);
+            font-weight: 700;
+            margin: 14px 0;
+        }
+
+        .hero-title span {
+            background: linear-gradient(90deg, var(--red), var(--bagamba-1), var(--bagamba-2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 14px;
+            max-width: 460px;
+            color: var(--text-muted);
+        }
+
+        .hero-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 18px 0 26px;
+        }
+
+        .hero-badge {
+            font-size: 11px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .hero-cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            align-items: center;
+        }
+
+        .btn-primary {
+            position: relative;
+            overflow: hidden;
+            padding: 10px 22px;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--white);
+            background: linear-gradient(90deg, var(--red), var(--bagamba-1));
+            box-shadow: 0 12px 30px rgba(128, 0, 32, 0.7);
+        }
+
+        .btn-primary::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, rgba(255, 255, 255, 0.15), transparent 30%, transparent 70%, rgba(255, 255, 255, 0.2));
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .btn-primary:hover::after {
+            transform: translateX(0);
+        }
+
+        .btn-secondary {
+            padding: 10px 18px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--white);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .hero-meta {
+            margin-top: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .hero-meta strong {
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .hero-visual {
+            position: relative;
+        }
+
+        .hero-card {
+            background: radial-gradient(circle at top left, #24141b 0, #050505 60%, #000 100%);
+            border-radius: var(--radius-lg);
+            padding: 18px 18px 22px;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            overflow: hidden;
+        }
+
+        .hero-tag {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+        }
+
+        .hero-product-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .hero-product-name span {
+            color: var(--bagamba-2);
+        }
+
+        .hero-product-image {
+            margin: 18px 0 10px;
+            height: 190px;
+            border-radius: 16px;
+            background:
+                radial-gradient(circle at top left, rgba(255, 255, 255, 0.12), transparent 50%),
+                linear-gradient(135deg, #341623, #090308 55%, #151515 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-product-image::after {
+            content: "amen";
+            position: absolute;
+            inset: auto 10px 8px auto;
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: rgba(255, 255, 255, 0.08);
+        }
+
+        .hero-product-image::before {
+            content: "";
+            position: absolute;
+            inset: 26px 40px 26px 40px;
+            border-radius: 999px 999px 40px 40px;
+            background:
+                linear-gradient(120deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.4)),
+                radial-gradient(circle at top, var(--red) 0, transparent 65%),
+                radial-gradient(circle at bottom, var(--bagamba-1) 0, transparent 65%);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.9);
+        }
+
+        .hero-price-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 13px;
+        }
+
+        .hero-price-row strong {
+            font-size: 20px;
+        }
+
+        .hero-chip-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .chip {
+            font-size: 10px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-floating {
+            position: absolute;
+            right: -4px;
+            bottom: -22px;
+            width: 150px;
+            padding: 10px 12px;
+            border-radius: 18px;
+            background: rgba(5, 5, 5, 0.94);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 14px 38px rgba(0, 0, 0, 0.9);
+            font-size: 11px;
+        }
+
+        .hero-floating strong {
+            color: var(--bagamba-2);
+        }
+
+        @media (max-width: 900px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding-top: 56px;
+            }
+
+            .hero-floating {
+                position: static;
+                margin-top: 12px;
+                width: 100%;
+            }
+        }
+
+        /* Section heading */
+        .section {
+            padding: 24px 0 40px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .section-subtitle {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* Products grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 18px;
+        }
+
+        .product-card {
+            position: relative;
+            border-radius: 16px;
+            padding: 10px 10px 14px;
+            background: radial-gradient(circle at top, #241421 0, #06060a 50%, #000000 100%);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 14px 35px rgba(0, 0, 0, 0.65);
+            overflow: hidden;
+            transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.9);
+            border-color: rgba(255, 255, 255, 0.18);
+        }
+
+        .product-label {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 999px;
+            background: rgba(128, 0, 32, 0.9);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .product-image {
+            height: 140px;
+            border-radius: 12px;
+            background:
+                linear-gradient(120deg, rgba(255, 255, 255, 0.08), transparent 40%),
+                radial-gradient(circle at top, var(--red) 0, transparent 60%),
+                radial-gradient(circle at bottom, var(--bagamba-1) 0, transparent 60%);
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .product-image::after {
+            content: "amen";
+            position: absolute;
+            inset: auto 10px 6px auto;
+            font-size: 20px;
+            letter-spacing: 3px;
+            color: rgba(0, 0, 0, 0.22);
+        }
+
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 4px;
+        }
+
+        .product-name {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .product-category {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .product-price {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .product-price span {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-decoration: line-through;
+            margin-left: 6px;
+        }
+
+        .product-colors {
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        .product-actions {
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .qty-input {
+            width: 52px;
+            padding: 4px 6px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: rgba(0, 0, 0, 0.8);
+            color: var(--white);
+            font-size: 11px;
+        }
+
+        .btn-add {
+            flex: 1;
+            border-radius: 999px;
+            border: none;
+            padding: 6px 10px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            cursor: pointer;
+            background: linear-gradient(90deg, var(--red), var(--bagamba-1));
+            color: var(--white);
+        }
+
+        .btn-add.added {
+            background: rgba(0, 0, 0, 0.68);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* About */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        .about-text {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .about-pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-top: 12px;
+        }
+
+        .about-pill {
+            font-size: 11px;
+            padding: 5px 11px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .about-card {
+            border-radius: 16px;
+            padding: 16px;
+            background: radial-gradient(circle at top left, #2b1b18 0, #050505 55%, #000 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: var(--shadow-soft);
+            font-size: 12px;
+        }
+
+        .about-stat-row {
+            display: flex;
+            gap: 18px;
+            margin-top: 12px;
+            font-size: 11px;
+        }
+
+        .about-stat strong {
+            font-size: 16px;
+            display: block;
+        }
+
+        @media (max-width: 860px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Order / Cart section */
+        .order-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+            gap: 22px;
+            align-items: flex-start;
+        }
+
+        @media (max-width: 900px) {
+            .order-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .cart-box,
+        .order-form {
+            border-radius: 16px;
+            padding: 16px 16px 18px;
+            background: rgba(5, 5, 5, 0.96);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.75);
+        }
+
+        .cart-header,
+        .form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .cart-header span {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .cart-items {
+            max-height: 220px;
+            overflow-y: auto;
+            padding-right: 4px;
+            margin-bottom: 10px;
+        }
+
+        .cart-item-row {
+            display: grid;
+            grid-template-columns: 1fr auto auto auto;
+            gap: 8px;
+            align-items: center;
+            font-size: 11px;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .cart-item-name {
+            font-weight: 500;
+        }
+
+        .cart-empty {
+            font-size: 12px;
+            color: var(--text-muted);
+            padding: 6px 0 4px;
+        }
+
+        .cart-total-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-top: 4px;
+            padding-top: 6px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.16);
+        }
+
+        .cart-total-row strong {
+            font-size: 14px;
+        }
+
+        .cart-note {
+            margin-top: 6px;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* Form */
+        .order-form form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 12px;
+        }
+
+        .order-form .full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            font-size: 11px;
+        }
+
+        .form-group label {
+            color: var(--text-muted);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.24);
+            background: rgba(0, 0, 0, 0.9);
+            color: var(--white);
+            padding: 7px 10px;
+            font-size: 12px;
+        }
+
+        .form-group textarea {
+            border-radius: 14px;
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .form-help {
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        .order-submit-row {
+            margin-top: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .order-submit-row small {
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        .btn-submit {
+            border-radius: 999px;
+            padding: 8px 20px;
+            font-size: 12px;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(90deg, var(--red), var(--bagamba-1));
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Contact footer */
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 16px 0 20px;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .footer-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            font-size: 11px;
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* CHATBOT */
+        .chatbot-toggle {
+            position: fixed;
+            bottom: 90px;
+            left: 20px;
+            z-index: 60;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--red), var(--bagamba-1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+            cursor: pointer;
+        }
+
+        .chatbot-toggle span {
+            font-size: 24px;
+        }
+
+        .chatbot-window {
+            position: fixed;
+            bottom: 150px;
+            left: 20px;
+            width: 280px;
+            max-height: 380px;
+            background: #050506;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.85);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 60;
+        }
+
+        .chatbot-header {
+            padding: 10px 12px;
+            background: linear-gradient(90deg, var(--red), var(--bagamba-1));
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbot-header strong {
+            font-size: 13px;
+        }
+
+        .chatbot-body {
+            padding: 8px 10px;
+            font-size: 11px;
+            color: var(--text-muted);
+            background: #050506;
+        }
+
+        .chatbot-messages {
+            max-height: 210px;
+            overflow-y: auto;
+            margin-bottom: 6px;
+        }
+
+        .chat-msg {
+            margin: 4px 0;
+        }
+
+        .chat-msg.bot {
+            color: var(--white);
+        }
+
+        .chat-msg.user {
+            text-align: right;
+            color: var(--bagamba-2);
+        }
+
+        .chatbot-questions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: 4px;
+        }
+
+        .chatbot-questions button {
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--white);
+            font-size: 10px;
+            padding: 4px 8px;
+            cursor: pointer;
+        }
+
+        .chatbot-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 6px 8px;
+            display: flex;
+            gap: 4px;
+        }
+
+        .chatbot-input {
+            flex: 1;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: #050506;
+            color: var(--white);
+            font-size: 11px;
+            padding: 4px 8px;
+        }
+
+        .chatbot-send {
+            border-radius: 999px;
+            border: none;
+            background: var(--bagamba-1);
+            color: #000;
+            font-size: 11px;
+            padding: 4px 10px;
+            cursor: pointer;
+        }
+
+        /* Floating WhatsApp cart button */
+        .wa-cart-button {
+            position: fixed;
+            bottom: 24px;
+            right: 20px;
+            z-index: 60;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: #25d366;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 28px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+            cursor: pointer;
+            animation: waBlink 1.2s infinite;
+        }
+
+        @keyframes waBlink {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6);
+            }
+            50% {
+                transform: scale(1.06);
+                box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+            }
+        }
+
+        .wa-cart-button-badge {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            min-width: 16px;
+            height: 16px;
+            border-radius: 999px;
+            background: var(--red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container nav">
+        <div class="logo">
+            <div class="logo-mark">
+                <img src="Logo.jpeg" alt="Amen Clothing logo" class="logo-image">
+            </div>
+            <div class="logo-text">
+                <span>Amen</span>
+                <span class="logo-tagline">Express: Contemporary affirmations</span>
+            </div>
+        </div>
+
+        <nav class="nav-links" id="navLinks">
+            <a href="#hero">Home</a>
+            <a href="#products">Shop</a>
+            <a href="#about">About</a>
+            <a href="#order">Order</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <div style="display:flex;align-items:center;gap:10px;">
+            <div class="cart-indicator" onclick="scrollToOrder()">
+                <div class="cart-icon">🛒</div>
+                <div>
+                    <div style="font-size:11px;">Cart</div>
+                    <div class="cart-count"><span id="cartCount">0</span> items</div>
+                </div>
+            </div>
+
+            <div class="nav-toggle" id="navToggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="container hero-grid">
+            <div class="reveal">
+                <div class="hero-eyebrow">Amen. collection</div>
+                <h1 class="hero-title">
+                    Street‑ready <span>hoodies, caps & tees</span> designed to bless every move.
+                </h1>
+                <p class="hero-subtitle">
+                    Amen is a faith‑driven streetwear label, blending divine burgundy, peaceful off‑white, sacred gold and strong black into everyday fits that speak without shouting.
+                </p>
+
+                <div class="hero-badges">
+                    <div class="hero-badge">Premium cotton blends</div>
+                    <div class="hero-badge">Unisex fits</div>
+                    <div class="hero-badge">Same‑day local delivery*</div>
+                </div>
+
+                <div class="hero-cta">
+                    <button class="btn-primary" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
+                        Shop amen now
+                    </button>
+                    <button class="btn-secondary" onclick="document.getElementById('order').scrollIntoView({behavior:'smooth'})">
+                        Make an order
+                    </button>
+                </div>
+
+                <div class="hero-meta">
+                    <div><strong>New:</strong> Amen Flame Hoodie drop</div>
+                    <div><strong>TZS & USD</strong> payments supported</div>
+                </div>
+            </div>
+
+            <div class="hero-visual reveal">
+                <div class="hero-card">
+                    <div class="hero-tag">Featured drop</div>
+                    <div class="hero-product-name">
+                        Amen <span> Flame Hoodie</span>
+                    </div>
+
+                    <div class="hero-product-image"></div>
+
+                    <div class="hero-price-row">
+                        <div>
+                            <strong>TZS 85,000</strong>
+                            <span style="font-size:11px;color:var(--text-muted);margin-left:6px;text-decoration:line-through;">95,000</span>
+                        </div>
+                        <div style="font-size:11px;color:var(--text-muted);">Sizes: S – XXL</div>
+                    </div>
+
+                    <div class="hero-chip-row">
+                        <span class="chip">Soft fleece</span>
+                        <span class="chip">Unisex</span>
+                        <span class="chip">Limited run</span>
+                    </div>
+                </div>
+
+                <div class="hero-floating">
+                    <strong>Colour story</strong>
+                    <p>
+                        Burgundy, gold, off‑white and black—rooted in East African soul, made for modern city streets.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="section" id="products">
+        <div class="container">
+            <div class="section-header reveal">
+                <div>
+                    <h2 class="section-title">Featured amen pieces</h2>
+                    <p class="section-subtitle">Pick products and they will appear in your order cart automatically.</p>
+                </div>
+                <button class="btn-secondary" onclick="scrollToOrder()">View cart</button>
+            </div>
+
+            <div class="product-grid">
+                <!-- Product 1 -->
+                <article class="product-card reveal" data-name="amen Flame Hoodie" data-price="85000">
+                    <span class="product-label">Hot</span>
+                    <div class="product-image"></div>
+
+                    <div class="product-meta">
+                        <div>
+                            <div class="product-name">amen Flame Hoodie</div>
+                            <div class="product-category">Hoodie · Heavyweight fleece</div>
+                        </div>
+                        <div class="product-price">
+                            TZS 85,000
+                            <span>95,000</span>
+                        </div>
+                    </div>
+                    <div class="product-colors">Colours: Burgundy / Black / Gold print</div>
+                    <div class="product-actions">
+                        <input type="number" min="1" value="1" class="qty-input">
+                        <button class="btn-add" type="button">Add to cart</button>
+                    </div>
+                </article>
+
+                <!-- Product 2 -->
+                <article class="product-card reveal" data-name="amen Crown Cap" data-price="35000">
+                    <span class="product-label" style="background:rgba(0,0,0,0.85);">Classic</span>
+                    <div class="product-image"></div>
+
+                    <div class="product-meta">
+                        <div>
+                            <div class="product-name">amen Crown Cap</div>
+                            <div class="product-category">Cap · Snapback</div>
+                        </div>
+                        <div class="product-price">
+                            TZS 35,000
+                            <span>40,000</span>
+                        </div>
+                    </div>
+                    <div class="product-colors">Colours: Black / Off‑white / Gold stitch</div>
+                    <div class="product-actions">
+                        <input type="number" min="1" value="1" class="qty-input">
+                        <button class="btn-add" type="button">Add to cart</button>
+                    </div>
+                </article>
+
+                <!-- Product 3 -->
+                <article class="product-card reveal" data-name="amen Script Tee" data-price="28000">
+                    <span class="product-label" style="background:rgba(212,175,55,0.9);">New</span>
+                    <div class="product-image"></div>
+
+                    <div class="product-meta">
+                        <div>
+                            <div class="product-name">Amen Script Tee</div>
+                            <div class="product-category">T‑shirt · 180gsm cotton</div>
+                        </div>
+                        <div class="product-price">
+                            TZS 28,000
+                            <span>32,000</span>
+                        </div>
+                    </div>
+                    <div class="product-colors">Colours: Off‑white / Black / Burgundy print</div>
+                    <div class="product-actions">
+                        <input type="number" min="1" value="1" class="qty-input">
+                        <button class="btn-add" type="button">Add to cart</button>
+                    </div>
+                </article>
+
+                <!-- Product 4 -->
+                <article class="product-card reveal" data-name="amen Everyday Hoodie" data-price="72000">
+                    <span class="product-label" style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.4);">Essentials</span>
+                    <div class="product-image"></div>
+
+                    <div class="product-meta">
+                        <div>
+                            <div class="product-name">amen Everyday Hoodie</div>
+                            <div class="product-category">Hoodie · Lightweight</div>
+                        </div>
+                        <div class="product-price">
+                            TZS 72,000
+                            <span>79,000</span>
+                        </div>
+                    </div>
+                    <div class="product-colors">Colours: Burgundy / Black / Off‑white detail</div>
+                    <div class="product-actions">
+                        <input type="number" min="1" value="1" class="qty-input">
+                        <button class="btn-add" type="button">Add to cart</button>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+        <div class="container about-grid">
+            <div class="reveal">
+                <div class="section-header" style="margin-bottom:10px;">
+                    <div>
+                        <h2 class="section-title">The amen story</h2>
+                        <p class="section-subtitle">Rooted in East African soul, made for modern expression.</p>
+                    </div>
+                </div>
+                <p class="about-text">
+                    Amen is a faith‑driven streetwear label that brings calm simplicity, bold expression and rootedness into every outfit.
+                    We work with clean silhouettes and rich, spiritual colour to keep your look minimal but meaningful.
+                </p>
+                <p class="about-text" style="margin-top:10px;">
+                    Affirmation is our fabric. Style is our language.
+                    Every amen piece carries intention—from the phrase across your chest to the tag resting at your neck.
+                </p>
+
+                <div class="about-pill-row">
+                    <div class="about-pill">Burgundy · Divine royalty</div>
+                    <div class="about-pill">Off‑white · Peace</div>
+                    <div class="about-pill">Gold · Sacred power</div>
+                    <div class="about-pill">Black · Strength and clarity</div>
+                </div>
+            </div>
+
+            <div class="about-card reveal">
+                <h3 style="font-size:14px;margin-bottom:4px;">Why people choose amen</h3>
+                <p>
+                    Soft fabrics, sharp printing and fits that match our climate.
+                    Your favourite hoodie should feel like a hug, not heavy armour.
+                </p>
+                <div class="about-stat-row">
+                    <div class="about-stat">
+                        <strong>24h</strong>
+                        <span>average local delivery time inside Dar (for ready stock)</span>
+                    </div>
+                    <div class="about-stat">
+                        <strong>3+</strong>
+                        <span>core categories: hoodies, caps, tees — more coming soon</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ORDER / CART -->
+    <section class="section" id="order">
+        <div class="container">
+            <div class="section-header reveal">
+                <div>
+                    <h2 class="section-title">Make your amen order</h2>
+                    <p class="section-subtitle">
+                        Add products above, then fill your details here. You will receive a WhatsApp / email confirmation.
+                    </p>
+                </div>
+            </div>
+
+            <div class="order-layout">
+                <!-- Cart summary -->
+                <div class="cart-box reveal">
+                    <div class="cart-header">
+                        <h3 style="font-size:14px;">Your cart</h3>
+                        <span><span id="itemCountText">0</span> item(s)</span>
+                    </div>
+                    <div class="cart-items" id="cartItems"></div>
+                    <div class="cart-total-row">
+                        <span>Total (TZS)</span>
+                        <strong id="cartTotal">0</strong>
+                    </div>
+                    <p class="cart-note">
+                        Note: This is a simple order request. You will confirm payment method, delivery cost and exact sizes directly with the amen team.
+                    </p>
+                </div>
+
+                <!-- Order form -->
+                <div class="order-form reveal">
+                    <div class="form-header">
+                        <h3 style="font-size:14px;">Your details</h3>
+                        <span style="font-size:11px;color:var(--text-muted);">Step 2 of 2</span>
+                    </div>
+
+                    <form id="orderForm">
+                        <div class="form-group">
+                            <label for="fullName">Full name</label>
+                            <input id="fullName" name="fullName" type="text" required placeholder="e.g. John amen">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone / WhatsApp</label>
+                            <input id="phone" name="phone" type="tel" required placeholder="e.g. +255 7xx xxx xxx">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email (optional)</label>
+                            <input id="email" name="email" type="email" placeholder="you@example.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input id="city" name="city" type="text" required placeholder="e.g. Dar es Salaam">
+                        </div>
+
+                        <div class="form-group full">
+                            <label for="address">Delivery area / address</label>
+                            <input id="address" name="address" type="text" required placeholder="e.g. Changanyikeni, Bondeni Street">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="size">Usual size</label>
+                            <select id="size" name="size">
+                                <option value="">Choose size (for hoodies & tees)</option>
+                                <option value="XS">XS</option>
+                                <option value="S">S</option>
+                                <option value="M">M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                                <option value="XXL">XXL</option>
+                            </select>
+                            <span class="form-help">You can still specify exact sizes per item in the note.</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="payment">Preferred payment</label>
+                            <select id="payment" name="payment">
+                                <option value="">Choose method</option>
+                                <option value="Mobile Money">Mobile money (M‑Pesa / Tigo Pesa / Airtel Money)</option>
+                                <option value="Bank">Bank transfer</option>
+                                <option value="Cash on delivery">Cash on delivery (Dar only)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full">
+                            <label for="note">Extra note (sizes, colours, time)</label>
+                            <textarea id="note" name="note" placeholder="Write any details we should know…"></textarea>
+                        </div>
+
+                        <div class="order-submit-row full">
+                            <small>By sending this order you agree that an amen representative can contact you on phone / WhatsApp to confirm.</small>
+                            <button class="btn-submit" type="submit">Place order</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer id="contact">
+    <div class="container footer-grid">
+        <div class="footer-brand">
+            <span>&copy; <span id="year"></span> amen Clothing.</span>
+            <span>Affirmation‑driven streetwear · Dar es Salaam, Tanzania.</span>
+        </div>
+        <div class="footer-links">
+            <a href="tel:+255655786630">Call: +255 7xx xxx xxx</a>
+            <a href="https://wa.me/255655786630" target="_blank" rel="noopener">WhatsApp us</a>
+            <a href="mailto:orders@amenbrand.com">orders@amenbrand.com</a>
+        </div>
+    </div>
+</footer>
+
+<!-- CHATBOT TOGGLE + WINDOW -->
+<div class="chatbot-toggle" id="chatbotToggle" title="Chat with Amen">
+    <span>💬</span>
+</div>
+
+<div class="chatbot-window" id="chatbotWindow">
+    <div class="chatbot-header">
+        <div>
+            <strong>Amen assistant</strong><br>
+            <span style="font-size:10px;">Ask about sizes, delivery, payments</span>
+        </div>
+        <button style="border:none;background:transparent;color:#fff;font-size:16px;cursor:pointer;" id="chatbotClose">×</button>
+    </div>
+    <div class="chatbot-body">
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="chat-msg bot">Hi! I’m the Amen assistant. How can I help you today?</div>
+        </div>
+        <div class="chatbot-questions">
+            <button data-question="What sizes do you have?">Sizes</button>
+            <button data-question="How much is delivery in Dar es Salaam?">Delivery</button>
+            <button data-question="How can I pay for my order?">Payments</button>
+            <button data-question="How long will my order take?">Order time</button>
+        </div>
+    </div>
+    <div class="chatbot-footer">
+        <input type="text" id="chatbotInput" class="chatbot-input" placeholder="Type your question…">
+        <button class="chatbot-send" id="chatbotSend">Send</button>
+    </div>
+</div>
+
+<!-- Floating WhatsApp cart button -->
+<div class="wa-cart-button" id="waCartButton" title="WhatsApp your cart">
+    <span>🟢</span>
+    <div class="wa-cart-button-badge" id="waCartBadge">0</div>
+</div>
+
+<script>
+    // Mobile nav toggle
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    navToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('open');
+    });
+
+    // Simple scroll-reveal
+    const revealEls = document.querySelectorAll('.reveal');
+
+    const revealOnScroll = () => {
+        const trigger = window.innerHeight * 0.85;
+        revealEls.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < trigger) {
+                el.classList.add('revealed');
+            }
+        });
+    };
+
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
+
+    // Cart logic
+    const cart = [];
+    const cartCountEl = document.getElementById('cartCount');
+    const itemCountText = document.getElementById('itemCountText');
+    const cartTotalEl = document.getElementById('cartTotal');
+    const cartItemsEl = document.getElementById('cartItems');
+    const waCartBadge = document.getElementById('waCartBadge');
+
+    function updateCartUI() {
+        let total = 0;
+        let count = 0;
+        cartItemsEl.innerHTML = '';
+
+        if (cart.length === 0) {
+            cartItemsEl.innerHTML = '<p class="cart-empty">No items yet. Add hoodies, caps or tees above.</p>';
+        } else {
+            cart.forEach(item => {
+                const subtotal = item.price * item.qty;
+                total += subtotal;
+                count += item.qty;
+
+                const row = document.createElement('div');
+                row.className = 'cart-item-row';
+                row.innerHTML = `
+                    <div class="cart-item-name">${item.name}</div>
+                    <div>x${item.qty}</div>
+                    <div>${item.price.toLocaleString()}</div>
+                    <div>${subtotal.toLocaleString()}</div>
+                `;
+                cartItemsEl.appendChild(row);
+            });
+        }
+
+        cartTotalEl.textContent = total.toLocaleString();
+        cartCountEl.textContent = count;
+        itemCountText.textContent = count;
+        waCartBadge.textContent = count;
+    }
+
+    // Attach add-to-cart to product cards
+    document.querySelectorAll('.product-card').forEach(card => {
+        const addBtn = card.querySelector('.btn-add');
+        const qtyInput = card.querySelector('.qty-input');
+        const name = card.dataset.name;
+        const price = Number(card.dataset.price);
+
+        addBtn.addEventListener('click', () => {
+            const qty = Math.max(1, parseInt(qtyInput.value, 10) || 1);
+
+            const existing = cart.find(item => item.name === name);
+            if (existing) {
+                const index = cart.indexOf(existing);
+                cart.splice(index, 1);
+                addBtn.textContent = 'Add to cart';
+                addBtn.classList.remove('added');
+            } else {
+                cart.push({ name, price, qty });
+                addBtn.textContent = 'In cart';
+                addBtn.classList.add('added');
+            }
+
+            updateCartUI();
+        });
+    });
+
+    function scrollToOrder() {
+        document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Build WhatsApp message from cart + form data (if any)
+    function buildWhatsAppSummary(extraNote) {
+        let summary = 'amen order request (from website)%0A%0A';
+
+        // Cart
+        if (cart.length === 0) {
+            summary += 'Cart: (customer clicked WhatsApp with empty cart)%0A';
+        } else {
+            summary += '*Cart*%0A';
+            let total = 0;
+            cart.forEach(item => {
+                const subtotal = item.price * item.qty;
+                total += subtotal;
+                summary += '- ' + item.name + ' x' + item.qty +
+                    ' = TZS ' + subtotal.toLocaleString() + '%0A';
+            });
+            summary += '%0A*Total (approx)*: TZS ' + total.toLocaleString() + '%0A';
+        }
+
+        if (extraNote) {
+            summary += '%0AExtra note: ' + extraNote;
+        }
+
+        return summary;
+    }
+
+    // Floating WhatsApp cart button
+    const waCartButton = document.getElementById('waCartButton');
+    waCartButton.addEventListener('click', () => {
+        const phoneNumber = '255655786630';
+        const summary = buildWhatsAppSummary('');
+        const url = 'https://wa.me/' + phoneNumber + '?text=' + summary;
+        window.open(url, '_blank');
+    });
+
+    // Order form submit -> WhatsApp with full details
+    const orderForm = document.getElementById('orderForm');
+
+    orderForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        if (cart.length === 0) {
+            alert('Your cart is empty. Please add at least one amen product before placing an order.');
+            return;
+        }
+
+        const data = new FormData(orderForm);
+        const name = data.get('fullName');
+        const phone = data.get('phone');
+        const email = data.get('email');
+        const city = data.get('city');
+        const address = data.get('address');
+        const size = data.get('size');
+        const payment = data.get('payment');
+        const note = data.get('note');
+
+        let summary = 'amen order request%0A%0A';
+        summary += '*Customer*%0A';
+        summary += 'Name: ' + name + '%0A';
+        summary += 'Phone: ' + phone + '%0A';
+        if (email) summary += 'Email: ' + email + '%0A';
+        summary += 'City: ' + city + '%0A';
+        summary += 'Address: ' + address + '%0A';
+        if (size) summary += 'Usual size: ' + size + '%0A';
+        if (payment) summary += 'Preferred payment: ' + payment + '%0A';
+        if (note) summary += 'Note: ' + note + '%0A';
+
+        summary += '%0A*Cart*%0A';
+
+        let total = 0;
+        cart.forEach(item => {
+            const subtotal = item.price * item.qty;
+            total += subtotal;
+            summary += '- ' + item.name + ' x' + item.qty +
+                ' = TZS ' + subtotal.toLocaleString() + '%0A';
+        });
+        summary += '%0A*Total*: TZS ' + total.toLocaleString();
+
+        const phoneNumber = '255655786630';
+        const url = 'https://wa.me/' + phoneNumber + '?text=' + summary;
+        window.open(url, '_blank');
+
+        alert('Thank you ' + name + '! Your order details are ready in WhatsApp. Please send the message to complete the request.');
+    });
+
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* CHATBOT LOGIC */
+    const chatbotToggle = document.getElementById('chatbotToggle');
+    const chatbotWindow = document.getElementById('chatbotWindow');
+    const chatbotClose = document.getElementById('chatbotClose');
+    const chatbotMessages = document.getElementById('chatbotMessages');
+    const chatbotInput = document.getElementById('chatbotInput');
+    const chatbotSend = document.getElementById('chatbotSend');
+
+    const faqAnswers = {
+        "sizes": "We currently stock sizes XS to XXL for hoodies and tees. For caps we use an adjustable snapback that fits most heads.",
+        "delivery": "Inside Dar es Salaam, most deliveries arrive within 24 hours for ready stock. Delivery fees depend on your exact area – we confirm on WhatsApp before you pay.",
+        "payments": "You can pay via mobile money (M‑Pesa, Tigo Pesa, Airtel Money), bank transfer, or cash on delivery inside Dar es Salaam.",
+        "order time": "Once we confirm your order on WhatsApp and payment method, preparation usually takes a few hours and delivery within 24 hours in Dar. Up‑country timing depends on the courier.",
+        "custom": "Yes, for some products we can do custom colours or phrases. Tell us what you want in the note when you order or directly on WhatsApp and we’ll confirm options and price."
+    };
+
+    function addChatMessage(text, from = 'bot') {
+        const div = document.createElement('div');
+        div.className = 'chat-msg ' + from;
+        div.textContent = text;
+        chatbotMessages.appendChild(div);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+
+    function answerQuestion(rawQuestion) {
+        const q = rawQuestion.toLowerCase();
+        let answer = "Thank you for your question. One of our team members will confirm details on WhatsApp when you place your order.";
+        if (q.includes('size')) answer = faqAnswers.sizes;
+        else if (q.includes('deliver')) answer = faqAnswers.delivery;
+        else if (q.includes('payment') || q.includes('pay')) answer = faqAnswers.payments;
+        else if (q.includes('time') || q.includes('long')) answer = faqAnswers['order time'];
+        else if (q.includes('custom') || q.includes('personal') || q.includes('phrase')) answer = faqAnswers.custom;
+        addChatMessage(answer, 'bot');
+    }
+
+    chatbotToggle.addEventListener('click', () => {
+        chatbotWindow.style.display = chatbotWindow.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    chatbotClose.addEventListener('click', () => {
+        chatbotWindow.style.display = 'none';
+    });
+
+    document.querySelectorAll('.chatbot-questions button').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const q = btn.dataset.question;
+            addChatMessage(q, 'user');
+            answerQuestion(q);
+        });
+    });
+
+    function sendCustomQuestion() {
+        const text = chatbotInput.value.trim();
+        if (!text) return;
+        addChatMessage(text, 'user');
+        chatbotInput.value = '';
+        answerQuestion(text);
+    }
+
+    chatbotSend.addEventListener('click', sendCustomQuestion);
+    chatbotInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            sendCustomQuestion();
+        }
+    });
+</script>
+
+</body>
+</html>
